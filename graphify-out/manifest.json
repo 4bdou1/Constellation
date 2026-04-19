@@ -1,0 +1,18 @@
+{
+  "postcss.config.js": 1776495276.6375477,
+  "tailwind.config.js": 1776495276.3928857,
+  "vite.config.js": 1776495268.9061868,
+  "src\\App.jsx": 1776495301.4940088,
+  "src\\main.jsx": 1776495299.4230099,
+  "src\\components\\Constellation.jsx": 1776495453.9660885,
+  "src\\components\\Finale.jsx": 1776495475.6718004,
+  "src\\components\\FriendNode.jsx": 1776495368.235107,
+  "src\\components\\FriendPage.jsx": 1776495424.9166236,
+  "src\\components\\Landing.jsx": 1776495351.2057302,
+  "src\\components\\Quote.jsx": 1776495384.6229465,
+  "src\\components\\Stars.jsx": 1776495331.6070697,
+  "src\\components\\VideoPlayer.jsx": 1776495404.6202683,
+  "src\\data\\friends.js": 1776495317.1755729,
+  "src\\data\\quotes.js": 1776495322.2431571,
+  "public\\star.svg": 1776495485.188264
+}

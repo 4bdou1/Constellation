@@ -1,0 +1,302 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --deep-space: #0a0e27;
+  --midnight-blue: #1a1f3a;
+  --nebula-purple: #2d1b4e;
+  --star-glow: #ffd89b;
+  --warm-gold: #f6e6c2;
+  --soft-cream: #fff8e7;
+  --accent-pink: #ff6b9d;
+
+  /* shadcn/ui CSS variables — mapped to project palette */
+  --background: 234 62% 10%;
+  --foreground: 43 100% 95%;
+  --card: 232 38% 17%;
+  --card-foreground: 43 100% 95%;
+  --primary: 37 100% 80%;
+  --primary-foreground: 234 62% 10%;
+  --secondary: 269 46% 20%;
+  --secondary-foreground: 43 100% 95%;
+  --muted: 232 38% 17%;
+  --muted-foreground: 39 72% 75%;
+  --border: 232 38% 25%;
+  --ring: 37 100% 80%;
+  --destructive: 337 100% 71%;
+  --destructive-foreground: 43 100% 95%;
+  --radius: 0.5rem;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: var(--deep-space);
+  color: var(--soft-cream);
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Star background */
+.stars-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: white;
+}
+
+/* Video aspect ratio container */
+.video-vertical {
+  aspect-ratio: 9 / 16;
+  width: 100%;
+  background: #111;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.video-vertical video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--deep-space);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--star-glow);
+  border-radius: 2px;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(255, 216, 155, 0.3);
+  color: var(--soft-cream);
+}
+
+/* Focus outline */
+*:focus-visible {
+  outline: 2px solid var(--star-glow);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Page transitions */
+.page-enter {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* ─────────────────────────────────────────
+   3-D Poem Animation (pa- prefix)
+───────────────────────────────────────── */
+
+@keyframes pa-left   { 100% { margin-left: -54000px; } }
+@keyframes pa-back   { 100% { margin-left: -54870px; } }
+@keyframes pa-right  { 100% { margin-left: -55740px; } }
+
+@keyframes pa-hue {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50%       { filter: hue-rotate(100deg); }
+}
+@keyframes pa-zoom {
+  0%   { transform: scale(1); }
+  100% { transform: scale(2.5); }
+}
+@keyframes pa-blur {
+  0%   { filter: blur(0px); }
+  100% { filter: blur(3px); }
+}
+@keyframes pa-brightness {
+  0%   { filter: brightness(1) contrast(1); }
+  100% { filter: brightness(0.8) contrast(1.3); }
+}
+@keyframes pa-glow {
+  0%, 100% { text-shadow: 0 0 5px rgba(255,255,255,0.2); }
+  50%       { text-shadow: 0 0 20px rgba(255,255,255,0.5); }
+}
+@keyframes pa-spin {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(-360deg); }
+}
+
+/* Outer wrappers */
+.pa-root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.pa-outer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 500px;
+}
+.pa-content {
+  transform-origin: center center;
+  width: 1000px;
+  height: 562px;
+  flex-shrink: 0;
+}
+
+/* Stage (the 1000×562 canvas) */
+.pa-stage {
+  width: 1000px;
+  height: 562px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hue overlay */
+.pa-hue {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  animation: pa-hue 10s ease-in-out infinite;
+}
+
+/* Background image */
+.pa-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  animation: pa-zoom 20s linear forwards, pa-blur 20s linear forwards, pa-brightness 20s linear forwards;
+}
+
+/* Character silhouette */
+.pa-char {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 90%;
+  z-index: 3;
+  object-fit: contain;
+}
+
+/* Cube scene (perspective holder) */
+.pa-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 200px;
+  z-index: 2;
+}
+
+/* Reflection */
+.pa-reflect {
+  transform: scaleY(-1);
+  opacity: 0.25;
+  filter: blur(1px);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 70%);
+  mask-image: linear-gradient(to bottom, black 0%, transparent 70%);
+}
+
+/* The cube */
+.pa-cube {
+  width: 1000px;
+  height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: pa-spin 15s linear infinite;
+}
+
+/* Faces */
+.pa-face {
+  position: absolute;
+  width: 1000px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.pa-front  { transform: translateZ(500px); }
+.pa-back   { transform: rotateY(180deg) translateZ(500px); }
+.pa-left   { transform: rotateY(-90deg)  translateZ(500px); }
+.pa-right  { transform: rotateY(90deg)   translateZ(500px); }
+.pa-top    { transform: rotateX(90deg)   translateZ(100px); background: rgba(255,255,255,0.03); }
+.pa-bottom { transform: rotateX(-90deg)  translateZ(100px); background: rgba(255,255,255,0.01); }
+
+/* Text faces */
+.pa-text {
+  white-space: nowrap;
+  overflow: visible;
+}
+.pa-text p {
+  white-space: nowrap;
+  font-family: 'Georgia', serif;
+  font-size: 50px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  animation: pa-glow 3s ease-in-out infinite;
+}
+.pa-text p span { color: #fff; font-weight: 700; }
+
+.pa-left  p { animation: pa-left  80s linear infinite, pa-glow 3s ease-in-out infinite; }
+.pa-back  p { animation: pa-back  80s linear infinite, pa-glow 3s ease-in-out infinite 1s; }
+.pa-right p { animation: pa-right 80s linear infinite, pa-glow 3s ease-in-out infinite 2s; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Constellation lines */
+.constellation-line {
+  stroke: rgba(255, 216, 155, 0.12);
+  stroke-width: 1;
+}
+
+/* Friend node glow pulse */
+@keyframes nodePulse {
+  0%, 100% { box-shadow: 0 0 12px var(--node-color, #ffd89b), 0 0 24px transparent; }
+  50%       { box-shadow: 0 0 20px var(--node-color, #ffd89b), 0 0 40px var(--node-color, #ffd89b44); }
+}
+
+.node-pulse {
+  animation: nodePulse 3s ease-in-out infinite;
+}
+
+/* Quote float */
+@keyframes quoteFloat {
+  0%, 100% { transform: translateY(0); opacity: 0.8; }
+  50%       { transform: translateY(-8px); opacity: 1; }
+}
+
+.quote-float {
+  animation: quoteFloat 5s ease-in-out infinite;
+}

@@ -1,0 +1,607 @@
+{
+  "nodes": [
+    {
+      "id": "g0",
+      "type": "group",
+      "label": "Video Player",
+      "x": 0,
+      "y": 0,
+      "width": 660,
+      "height": 400,
+      "color": "1"
+    },
+    {
+      "id": "n_videoplayer_pastvideo",
+      "type": "file",
+      "file": "graphify/obsidian/PastVideo().md",
+      "x": 20,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_videoplayer_playicon",
+      "type": "file",
+      "file": "graphify/obsidian/PlayIcon().md",
+      "x": 220,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_videoplayer_presentvideo",
+      "type": "file",
+      "file": "graphify/obsidian/PresentVideo().md",
+      "x": 420,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_videoplayer_spinner",
+      "type": "file",
+      "file": "graphify/obsidian/Spinner().md",
+      "x": 20,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_components_videoplayer_jsx",
+      "type": "file",
+      "file": "graphify/obsidian/VideoPlayer.jsx.md",
+      "x": 220,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g1",
+      "type": "group",
+      "label": "Star SVG Asset",
+      "x": 740,
+      "y": 0,
+      "width": 660,
+      "height": 400,
+      "color": "2"
+    },
+    {
+      "id": "n_star_svg_32x32_viewport",
+      "type": "file",
+      "file": "graphify/obsidian/32x32 ViewBox.md",
+      "x": 760,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_star_svg_star_shape",
+      "type": "file",
+      "file": "graphify/obsidian/Five-Pointed Star Shape.md",
+      "x": 960,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_star_svg_color_ffd89b",
+      "type": "file",
+      "file": "graphify/obsidian/GoldWarm Yellow Fill Color ffd89b.md",
+      "x": 1160,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_star_svg_svg_icon",
+      "type": "file",
+      "file": "graphify/obsidian/SVG Icon Asset.md",
+      "x": 760,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_star_svg_file",
+      "type": "file",
+      "file": "graphify/obsidian/star.svg SVG File.md",
+      "x": 960,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g2",
+      "type": "group",
+      "label": "Constellation Animation",
+      "x": 1480,
+      "y": 0,
+      "width": 600,
+      "height": 400,
+      "color": "3"
+    },
+    {
+      "id": "n_constellation_constellation",
+      "type": "file",
+      "file": "graphify/obsidian/Constellation().md",
+      "x": 1500,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_components_constellation_jsx",
+      "type": "file",
+      "file": "graphify/obsidian/Constellation.jsx.md",
+      "x": 1700,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_constellation_constellationlines",
+      "type": "file",
+      "file": "graphify/obsidian/ConstellationLines().md",
+      "x": 1900,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g3",
+      "type": "group",
+      "label": "Friend Profile Page",
+      "x": 2160,
+      "y": 0,
+      "width": 600,
+      "height": 400,
+      "color": "4"
+    },
+    {
+      "id": "n_friendpage_arrowleft",
+      "type": "file",
+      "file": "graphify/obsidian/ArrowLeft().md",
+      "x": 2180,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_friendpage_friendpage",
+      "type": "file",
+      "file": "graphify/obsidian/FriendPage().md",
+      "x": 2380,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_components_friendpage_jsx",
+      "type": "file",
+      "file": "graphify/obsidian/FriendPage.jsx.md",
+      "x": 2580,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g4",
+      "type": "group",
+      "label": "Stars Background",
+      "x": 0,
+      "y": 480,
+      "width": 600,
+      "height": 400,
+      "color": "5"
+    },
+    {
+      "id": "n_stars_stars",
+      "type": "file",
+      "file": "graphify/obsidian/Stars().md",
+      "x": 20,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_components_stars_jsx",
+      "type": "file",
+      "file": "graphify/obsidian/Stars.jsx.md",
+      "x": 220,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_stars_randombetween",
+      "type": "file",
+      "file": "graphify/obsidian/randomBetween().md",
+      "x": 420,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g5",
+      "type": "group",
+      "label": "App Root",
+      "x": 740,
+      "y": 480,
+      "width": 600,
+      "height": 400,
+      "color": "6"
+    },
+    {
+      "id": "n_app_app",
+      "type": "file",
+      "file": "graphify/obsidian/App().md",
+      "x": 760,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_app_jsx",
+      "type": "file",
+      "file": "graphify/obsidian/App.jsx.md",
+      "x": 960,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g6",
+      "type": "group",
+      "label": "Finale Screen",
+      "x": 1480,
+      "y": 480,
+      "width": 600,
+      "height": 400,
+      "color": "1"
+    },
+    {
+      "id": "n_finale_finale",
+      "type": "file",
+      "file": "graphify/obsidian/Finale().md",
+      "x": 1500,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_components_finale_jsx",
+      "type": "file",
+      "file": "graphify/obsidian/Finale.jsx.md",
+      "x": 1700,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g7",
+      "type": "group",
+      "label": "Friend Node Card",
+      "x": 2160,
+      "y": 480,
+      "width": 600,
+      "height": 400,
+      "color": "2"
+    },
+    {
+      "id": "n_friendnode_friendnode",
+      "type": "file",
+      "file": "graphify/obsidian/FriendNode().md",
+      "x": 2180,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_components_friendnode_jsx",
+      "type": "file",
+      "file": "graphify/obsidian/FriendNode.jsx.md",
+      "x": 2380,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g8",
+      "type": "group",
+      "label": "Landing Page",
+      "x": 0,
+      "y": 960,
+      "width": 600,
+      "height": 400,
+      "color": "3"
+    },
+    {
+      "id": "n_landing_landing",
+      "type": "file",
+      "file": "graphify/obsidian/Landing().md",
+      "x": 20,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_components_landing_jsx",
+      "type": "file",
+      "file": "graphify/obsidian/Landing.jsx.md",
+      "x": 220,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g9",
+      "type": "group",
+      "label": "Floating Quotes",
+      "x": 740,
+      "y": 960,
+      "width": 600,
+      "height": 400,
+      "color": "4"
+    },
+    {
+      "id": "n_quote_floatingquotes",
+      "type": "file",
+      "file": "graphify/obsidian/FloatingQuotes().md",
+      "x": 760,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_src_components_quote_jsx",
+      "type": "file",
+      "file": "graphify/obsidian/Quote.jsx.md",
+      "x": 960,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g10",
+      "type": "group",
+      "label": "PostCSS Config",
+      "x": 1480,
+      "y": 960,
+      "width": 600,
+      "height": 400,
+      "color": "5"
+    },
+    {
+      "id": "n_postcss_config_js",
+      "type": "file",
+      "file": "graphify/obsidian/postcss.config.js.md",
+      "x": 1500,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g11",
+      "type": "group",
+      "label": "Tailwind Config",
+      "x": 2160,
+      "y": 960,
+      "width": 600,
+      "height": 400,
+      "color": "6"
+    },
+    {
+      "id": "n_tailwind_config_js",
+      "type": "file",
+      "file": "graphify/obsidian/tailwind.config.js.md",
+      "x": 2180,
+      "y": 1040,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g12",
+      "type": "group",
+      "label": "Vite Config",
+      "x": 0,
+      "y": 1440,
+      "width": 600,
+      "height": 400,
+      "color": "1"
+    },
+    {
+      "id": "n_vite_config_js",
+      "type": "file",
+      "file": "graphify/obsidian/vite.config.js.md",
+      "x": 20,
+      "y": 1520,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g13",
+      "type": "group",
+      "label": "App Entry Point",
+      "x": 740,
+      "y": 1440,
+      "width": 600,
+      "height": 400,
+      "color": "2"
+    },
+    {
+      "id": "n_src_main_jsx",
+      "type": "file",
+      "file": "graphify/obsidian/main.jsx.md",
+      "x": 760,
+      "y": 1520,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g14",
+      "type": "group",
+      "label": "Friends Data",
+      "x": 1480,
+      "y": 1440,
+      "width": 600,
+      "height": 400,
+      "color": "3"
+    },
+    {
+      "id": "n_src_data_friends_js",
+      "type": "file",
+      "file": "graphify/obsidian/friends.js.md",
+      "x": 1500,
+      "y": 1520,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g15",
+      "type": "group",
+      "label": "Quotes Data",
+      "x": 2160,
+      "y": 1440,
+      "width": 600,
+      "height": 400,
+      "color": "4"
+    },
+    {
+      "id": "n_src_data_quotes_js",
+      "type": "file",
+      "file": "graphify/obsidian/quotes.js.md",
+      "x": 2180,
+      "y": 1520,
+      "width": 180,
+      "height": 60
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_src_app_jsx_app_app",
+      "fromNode": "n_src_app_jsx",
+      "toNode": "n_app_app",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_components_constellation_jsx_constellation_constellationlines",
+      "fromNode": "n_src_components_constellation_jsx",
+      "toNode": "n_constellation_constellationlines",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_components_constellation_jsx_constellation_constellation",
+      "fromNode": "n_src_components_constellation_jsx",
+      "toNode": "n_constellation_constellation",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_components_finale_jsx_finale_finale",
+      "fromNode": "n_src_components_finale_jsx",
+      "toNode": "n_finale_finale",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_components_friendnode_jsx_friendnode_friendnode",
+      "fromNode": "n_src_components_friendnode_jsx",
+      "toNode": "n_friendnode_friendnode",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_components_friendpage_jsx_friendpage_arrowleft",
+      "fromNode": "n_src_components_friendpage_jsx",
+      "toNode": "n_friendpage_arrowleft",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_components_friendpage_jsx_friendpage_friendpage",
+      "fromNode": "n_src_components_friendpage_jsx",
+      "toNode": "n_friendpage_friendpage",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_components_landing_jsx_landing_landing",
+      "fromNode": "n_src_components_landing_jsx",
+      "toNode": "n_landing_landing",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_components_quote_jsx_quote_floatingquotes",
+      "fromNode": "n_src_components_quote_jsx",
+      "toNode": "n_quote_floatingquotes",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_components_stars_jsx_stars_randombetween",
+      "fromNode": "n_src_components_stars_jsx",
+      "toNode": "n_stars_randombetween",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_components_stars_jsx_stars_stars",
+      "fromNode": "n_src_components_stars_jsx",
+      "toNode": "n_stars_stars",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_components_videoplayer_jsx_videoplayer_playicon",
+      "fromNode": "n_src_components_videoplayer_jsx",
+      "toNode": "n_videoplayer_playicon",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_components_videoplayer_jsx_videoplayer_spinner",
+      "fromNode": "n_src_components_videoplayer_jsx",
+      "toNode": "n_videoplayer_spinner",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_components_videoplayer_jsx_videoplayer_presentvideo",
+      "fromNode": "n_src_components_videoplayer_jsx",
+      "toNode": "n_videoplayer_presentvideo",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_src_components_videoplayer_jsx_videoplayer_pastvideo",
+      "fromNode": "n_src_components_videoplayer_jsx",
+      "toNode": "n_videoplayer_pastvideo",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_star_svg_file_star_svg_star_shape",
+      "fromNode": "n_star_svg_file",
+      "toNode": "n_star_svg_star_shape",
+      "label": "implements [EXTRACTED]"
+    },
+    {
+      "id": "e_star_svg_file_star_svg_svg_icon",
+      "fromNode": "n_star_svg_file",
+      "toNode": "n_star_svg_svg_icon",
+      "label": "implements [EXTRACTED]"
+    },
+    {
+      "id": "e_star_svg_file_star_svg_32x32_viewport",
+      "fromNode": "n_star_svg_file",
+      "toNode": "n_star_svg_32x32_viewport",
+      "label": "implements [EXTRACTED]"
+    },
+    {
+      "id": "e_star_svg_svg_icon_star_svg_32x32_viewport",
+      "fromNode": "n_star_svg_svg_icon",
+      "toNode": "n_star_svg_32x32_viewport",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_star_svg_star_shape_star_svg_svg_icon",
+      "fromNode": "n_star_svg_star_shape",
+      "toNode": "n_star_svg_svg_icon",
+      "label": "conceptually_related_to [INFERRED]"
+    },
+    {
+      "id": "e_star_svg_star_shape_star_svg_color_ffd89b",
+      "fromNode": "n_star_svg_star_shape",
+      "toNode": "n_star_svg_color_ffd89b",
+      "label": "semantically_similar_to [INFERRED]"
+    }
+  ]
+}
