@@ -52,7 +52,7 @@ function StrVideoSection() {
         src="/STR.MOV"
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
         onPlay={onPlay}
         onPause={onPause}
         onEnded={onPause}
