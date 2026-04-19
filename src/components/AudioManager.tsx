@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { Howl, Howler } from 'howler'
 
 const TRACKS = [
@@ -8,42 +8,40 @@ const TRACKS = [
 
 const VOLUME = 0.22
 
+// Module-level singleton — survives StrictMode double-invoke
+let howl: Howl | null = null
+let trackIndex = 0
+let playing = false
+
+function playTrack(index: number) {
+  howl?.unload()
+
+  const sound = new Howl({
+    src: [TRACKS[index]],
+    html5: true,
+    volume: VOLUME,
+    onend: () => {
+      trackIndex = (index + 1) % TRACKS.length
+      playTrack(trackIndex)
+    },
+    onplayerror: () => {
+      sound.once('unlock', () => sound.play())
+    },
+  })
+
+  howl = sound
+  sound.play()
+  playing = true
+}
+
 export default function AudioManager() {
-  const indexRef = useRef(0)
-  const howlRef = useRef<Howl | null>(null)
-  const playingRef = useRef(false)
-
-  function playTrack(index: number) {
-    howlRef.current?.unload()
-
-    const sound = new Howl({
-      src: [TRACKS[index]],
-      html5: true,
-      volume: VOLUME,
-      onend: () => {
-        const next = (index + 1) % TRACKS.length
-        indexRef.current = next
-        playTrack(next)
-      },
-      onplayerror: () => {
-        // AudioContext locked — wait for interaction
-        sound.once('unlock', () => sound.play())
-      },
-    })
-
-    howlRef.current = sound
-    sound.play()
-    playingRef.current = true
-  }
-
   useEffect(() => {
-    // Try autoplay immediately
+    if (playing) return
+
     playTrack(0)
 
-    // Also hook into first interaction as extra safety net
     const onInteract = () => {
-      if (!playingRef.current) playTrack(indexRef.current)
-      // Resume suspended Web Audio context if needed
+      if (!playing) playTrack(trackIndex)
       if ((Howler as any).ctx?.state === 'suspended') {
         ;(Howler as any).ctx.resume()
       }
@@ -53,8 +51,6 @@ export default function AudioManager() {
 
     return () => {
       events.forEach(e => window.removeEventListener(e, onInteract))
-      howlRef.current?.unload()
-      playingRef.current = false
     }
   }, [])
 
