@@ -7,7 +7,7 @@ export const friends = [
     position: { x: 0, y: -185 },
     quote: "That brother who won't stop picking at you — and somehow you love him for it.",
     videos: {
-      present: '/Olofu.mov',
+      present: '/Olofu.mp4',
       past: [
         '/videos/olofu/past-1.mp4',
         '/videos/olofu/past-2.mp4',
@@ -24,7 +24,7 @@ export const friends = [
     position: { x: 148, y: -110 },
     quote: "\"Anganaganagim.\" Unserious at times — but knows exactly when and where to focus.",
     videos: {
-      present: '/Roger.mov',
+      present: '/Roger.mp4',
       past: [
         '/videos/roger/past-1.mp4',
         '/videos/roger/past-2.mp4',
@@ -41,7 +41,7 @@ export const friends = [
     position: { x: 185, y: 20 },
     quote: "Y'all are good together — she's the one keeping your madness in check when Tajira's already at it.",
     videos: {
-      present: '/Daniela.mov',
+      present: '/Daniela.mp4',
       past: [
         '/videos/daniela/past-1.mp4',
         '/videos/daniela/past-2.mp4',
@@ -58,7 +58,7 @@ export const friends = [
     position: { x: 130, y: 145 },
     quote: "Despite whatever he might say — when you trust him, he takes that trust seriously. You just know.",
     videos: {
-      present: '/Youssef.MOV',
+      present: '/Youssef.mp4',
       past: [
         '/videos/youssef/past-1.mp4',
         '/videos/youssef/past-2.mp4',
@@ -75,7 +75,7 @@ export const friends = [
     position: { x: 0, y: 185 },
     quote: "JUUUUUURE? wait no, SWEAR.",
     videos: {
-      present: '/Ara.mov',
+      present: '/Ara.mp4',
       past: [
         '/videos/ara/past-1.mp4',
         '/videos/ara/past-2.mp4',
@@ -92,7 +92,7 @@ export const friends = [
     position: { x: -130, y: 145 },
     quote: "Super cool and carefree — and don't let him forget: \"I'm better than you at basketball.\"",
     videos: {
-      present: '/Mayowa.MOV',
+      present: '/Mayowa.mp4',
       past: [
         '/videos/mayowa/past-1.mp4',
         '/videos/mayowa/past-2.mp4',
@@ -109,7 +109,7 @@ export const friends = [
     position: { x: -185, y: 20 },
     quote: "The girl you'd shamelessly simp with just for the fun of it — and somehow the gists never get old.",
     videos: {
-      present: '/Tajira.mov',
+      present: '/Tajira.mp4',
       past: [
         '/videos/tajira/past-1.mp4',
         '/videos/tajira/past-2.mp4',
@@ -126,7 +126,7 @@ export const friends = [
     position: { x: -148, y: -110 },
     quote: "Number one victim of your slaps — and somehow still one of the friendliest people around.",
     videos: {
-      present: '/Umar.mov',
+      present: '/Umar.mp4',
       past: [
         '/videos/umar/past-1.mp4',
         '/videos/umar/past-2.mp4',
@@ -143,7 +143,7 @@ export const friends = [
     position: { x: -55, y: -178 },
     quote: "A really good friend who's there when it counts — and someone who's grown so much it's impossible not to notice.",
     videos: {
-      present: '/Rayan.mov',
+      present: '/Rayan.mp4',
       past: [
         '/videos/rayan/past-1.mp4',
         '/videos/rayan/past-2.mp4',
@@ -160,7 +160,7 @@ export const friends = [
     position: { x: 55, y: -178 },
     quote: "From unwanted foe to sister — one of the realest friendships, built slowly and kept deeply.",
     videos: {
-      present: '/Aicha.mov',
+      present: '/Aicha.mp4',
       past: [
         '/videos/aicha/past-1.mp4',
         '/videos/aicha/past-2.mp4',

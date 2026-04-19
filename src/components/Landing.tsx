@@ -49,7 +49,7 @@ function StrVideoSection() {
     <ContainerTextScroll>
       <video
         ref={videoRef}
-        src="/STR.MOV"
+        src="/STR.mp4"
         loop
         playsInline
         preload="metadata"
