@@ -149,7 +149,6 @@ export function ParticleTextEffect({
     canvas.height = 400
 
     const s = stateRef.current
-    spawn(words[0], canvas)
 
     function loop() {
       const ctx = canvas!.getContext("2d")!
@@ -170,8 +169,31 @@ export function ParticleTextEffect({
       }
       s.animId = requestAnimationFrame(loop)
     }
-    loop()
-    return () => cancelAnimationFrame(s.animId)
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Reset to beginning every time user reaches this section
+          cancelAnimationFrame(s.animId)
+          s.frame = 0
+          s.wordIdx = 0
+          s.particles = []
+          const ctx = canvas.getContext("2d")!
+          ctx.clearRect(0, 0, canvas.width, canvas.height)
+          spawn(words[0], canvas)
+          loop()
+        } else {
+          cancelAnimationFrame(s.animId)
+        }
+      },
+      { threshold: 0.2 }
+    )
+    observer.observe(canvas)
+
+    return () => {
+      observer.disconnect()
+      cancelAnimationFrame(s.animId)
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
