@@ -25,7 +25,7 @@ function StrVideoSection() {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   const onPlay = useCallback(() => tweenVol(0, 600), [])
-  const onPause = useCallback(() => tweenVol(0.22, 800), [])
+  const onPause = useCallback(() => tweenVol(1, 800), [])
 
   // Auto-play when scrolled into view, pause when scrolled away
   useEffect(() => {
