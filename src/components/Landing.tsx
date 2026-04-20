@@ -2,6 +2,7 @@ import { useRef, useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { RadialScrollGallery } from '@/components/ui/portfolio-and-image-gallery'
+import { CircularGallery } from '@/components/ui/circular-gallery'
 import { ContainerTextScroll } from '@/components/ui/container-text-scroll'
 import { ParticleTextEffect } from '@/components/ui/particle-text-effect'
 import { friends } from '../data/friends'
@@ -227,63 +228,6 @@ function FlipCard({ onContinue }: { onContinue: () => void }) {
   )
 }
 
-function MobileCarousel({ onSelect }: { onSelect: (id: string) => void }) {
-  return (
-    <div
-      style={{
-        overflowX: 'scroll',
-        overflowY: 'hidden',
-        display: 'flex',
-        gap: '16px',
-        padding: '32px 24px',
-        scrollSnapType: 'x mandatory',
-        WebkitOverflowScrolling: 'touch',
-        scrollbarWidth: 'none',
-        msOverflowStyle: 'none',
-      }}
-    >
-      {friends.map((friend, i) => (
-        <motion.button
-          key={friend.id}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: i * 0.05 }}
-          onClick={() => onSelect(friend.id)}
-          style={{
-            flex: '0 0 68vw',
-            maxWidth: '260px',
-            height: '380px',
-            scrollSnapAlign: 'center',
-            position: 'relative',
-            borderRadius: '20px',
-            overflow: 'hidden',
-            border: `1px solid ${friend.color}55`,
-            boxShadow: `0 0 30px ${friend.color}18`,
-            textAlign: 'left',
-          }}
-        >
-          {friend.photo && (
-            <img
-              src={friend.photo}
-              alt=""
-              aria-hidden="true"
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.55 }}
-            />
-          )}
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.88) 45%, rgba(0,0,0,0.1) 100%)' }} />
-          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '20px' }}>
-            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '26px', fontWeight: 500, color: friend.color, marginBottom: '6px' }}>
-              {friend.name}
-            </p>
-            <p style={{ fontFamily: 'sans-serif', fontSize: '12px', lineHeight: 1.6, color: '#fff8e7aa', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-              {friend.quote}
-            </p>
-          </div>
-        </motion.button>
-      ))}
-    </div>
-  )
-}
 
 export default function Landing() {
   const navigate = useNavigate()
@@ -376,7 +320,10 @@ export default function Landing() {
         </div>
 
         {isMobile ? (
-          <MobileCarousel onSelect={(id: string) => navigate(`/friend/${id}`)} />
+          <CircularGallery
+            items={friends.map(f => ({ id: f.id, name: f.name, quote: f.quote, photo: f.photo, color: f.color }))}
+            onItemClick={(id) => navigate(`/friend/${id}`)}
+          />
         ) : (
           <RadialScrollGallery
             baseRadius={460}
