@@ -287,9 +287,9 @@ export default function Landing() {
       </div>
 
       {/* Gallery Section */}
-      <div ref={galleryRef} className="relative z-10 py-32">
+      <div ref={galleryRef} className="relative z-10 py-12 sm:py-32">
         {/* Header for Gallery */}
-        <div className="text-center mb-0 px-6">
+        <div className="text-center mb-0 px-4">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -48,6 +48,16 @@ body {
   overflow-x: hidden;
 }
 
+/* Remove 300ms tap delay on all interactive elements */
+a, button, [role="button"] {
+  touch-action: manipulation;
+}
+
+/* iOS momentum scrolling */
+body {
+  -webkit-overflow-scrolling: touch;
+}
+
 /* Star background */
 .stars-bg {
   position: fixed;

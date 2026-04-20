@@ -44,10 +44,10 @@ const createMaterial = () =>
   });
 
 
-function GalleryScene({ textures }: { textures: THREE.Texture[] }) {
+function GalleryScene({ textures, visible = 10, fpsCap = 1/24 }: { textures: THREE.Texture[], visible?: number, fpsCap?: number }) {
   const totalImages = textures.length;
   const depthRange = DEFAULT_DEPTH_RANGE;
-  const VISIBLE = 10;
+  const VISIBLE = visible;
 
   // All animation state stored in refs — zero React re-renders per frame
   const velocityRef = useRef(0);
@@ -92,7 +92,7 @@ function GalleryScene({ textures }: { textures: THREE.Texture[] }) {
   useFrame((state, delta) => {
     // Cap at ~24 fps to reduce GPU pressure alongside video decode
     const now = state.clock.elapsedTime;
-    if (now - lastFrameRef.current < 1 / 24) return;
+    if (now - lastFrameRef.current < fpsCap) return;
     lastFrameRef.current = now;
     // Ease velocity toward target — pure ref mutation, no setState
     velocityRef.current += (0.07 - velocityRef.current) * 0.04;
@@ -182,6 +182,7 @@ export default function InfiniteVideoGallery({
   className = 'h-full w-full',
   style,
 }: InfiniteVideoGalleryProps) {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
   const [textures, setTextures] = useState<THREE.Texture[]>([]);
   const videoEls = useRef<HTMLVideoElement[]>([]);
 
@@ -189,7 +190,7 @@ export default function InfiniteVideoGallery({
     if (videos.length === 0) return;
 
     // Cap at 3 concurrent video streams to avoid decode pressure
-    const active = videos.slice(0, 3);
+    const active = videos.slice(0, isMobile ? 1 : 3);
     const els: HTMLVideoElement[] = [];
     const txts: THREE.Texture[] = [];
 
@@ -203,7 +204,7 @@ export default function InfiniteVideoGallery({
       setTimeout(() => {
         v.src = src;
         v.play().catch(() => {});
-      }, 2500);
+      }, isMobile ? 4000 : 2500);
 
       // Restart only on stall — no aggressive heartbeat
       v.addEventListener('stalled', () => { setTimeout(() => v.play().catch(() => {}), 300); });
@@ -233,7 +234,7 @@ export default function InfiniteVideoGallery({
           gl={{ antialias: false, alpha: true, powerPreference: 'default' }}
           frameloop="always"
         >
-          <GalleryScene textures={textures} />
+          <GalleryScene textures={textures} visible={isMobile ? 5 : 10} fpsCap={isMobile ? 1/15 : 1/24} />
         </Canvas>
       )}
     </div>

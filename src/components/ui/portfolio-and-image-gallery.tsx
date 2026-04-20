@@ -180,6 +180,11 @@ export const RadialScrollGallery = forwardRef<
         ).matches;
 
         if (!prefersReducedMotion) {
+          // Normalize scroll for iOS momentum
+          if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+            ScrollTrigger.normalizeScroll(true)
+          }
+
           gsap.fromTo(
             containerRef.current.children,
             { scale: 0, autoAlpha: 0 },
@@ -304,6 +309,8 @@ export const RadialScrollGallery = forwardRef<
                     }}
                     onMouseEnter={() => !disabled && setHoveredIndex(index)}
                     onMouseLeave={() => !disabled && setHoveredIndex(null)}
+                    onTouchStart={() => !disabled && setHoveredIndex(index)}
+                    onTouchEnd={() => !disabled && setHoveredIndex(null)}
                     onFocus={() => !disabled && setHoveredIndex(index)}
                     onBlur={() => !disabled && setHoveredIndex(null)}
                     className={`

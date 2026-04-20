@@ -96,14 +96,14 @@ export default function FriendPage() {
       </motion.button>
 
       {/* ── Centre card: present video + quote ── */}
-      <div className="relative z-20 flex flex-col items-center justify-center h-screen px-6 pointer-events-none">
+      <div className="relative z-20 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 pointer-events-none">
         {/* Present video card */}
         <motion.div
           initial={{ opacity: 0, y: 24, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.15 }}
           className="pointer-events-auto w-full"
-          style={{ maxWidth: '340px', maxHeight: 'calc(100vh - 220px)' }}
+          style={{ maxWidth: '340px', maxHeight: 'calc(100vh - 180px)' }}
         >
           {/* Frosted backdrop */}
           <div
@@ -129,7 +129,7 @@ export default function FriendPage() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.35 }}
-          className="text-center font-sans italic text-base sm:text-lg leading-relaxed mt-8 max-w-sm pointer-events-none"
+          className="text-center font-sans italic text-sm sm:text-base md:text-lg leading-relaxed mt-4 sm:mt-8 max-w-sm pointer-events-none"
           style={{ color: '#fff8e7bb' }}
         >
           "{friend.quote}"
