@@ -43,28 +43,6 @@ const createMaterial = () =>
     `,
   });
 
-function VideoPlane({
-  texture,
-  position,
-  scale,
-  material,
-}: {
-  texture: THREE.Texture;
-  position: [number, number, number];
-  scale: [number, number, number];
-  material: THREE.ShaderMaterial;
-}) {
-  useEffect(() => {
-    if (material && texture) material.uniforms.map.value = texture;
-  }, [material, texture]);
-
-  return (
-    <mesh position={position} scale={scale} material={material}>
-      {/* Low-poly plane — 4×4 is plenty for a flat video quad */}
-      <planeGeometry args={[1, 1, 4, 4]} />
-    </mesh>
-  );
-}
 
 function GalleryScene({ textures }: { textures: THREE.Texture[] }) {
   const totalImages = textures.length;
@@ -217,13 +195,15 @@ export default function InfiniteVideoGallery({
 
     active.forEach((src) => {
       const v = document.createElement('video');
-      v.src = src;
       v.loop = true;
       v.muted = true;
       v.playsInline = true;
-      v.preload = 'auto';
-      // Defer play slightly so main video gets priority
-      setTimeout(() => v.play().catch(() => {}), 800);
+      v.preload = 'none';
+      // Delay background videos so the main video gets full bandwidth first
+      setTimeout(() => {
+        v.src = src;
+        v.play().catch(() => {});
+      }, 2500);
 
       // Restart only on stall — no aggressive heartbeat
       v.addEventListener('stalled', () => { setTimeout(() => v.play().catch(() => {}), 300); });
