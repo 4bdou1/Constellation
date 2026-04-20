@@ -57,7 +57,7 @@ export function PresentVideo({ src, friendName, naturalAspect = false, objectPos
       style={{ maxWidth: '360px', maxHeight: 'calc(100vh - 220px)', margin: '0 auto', overflow: 'hidden' }}
     >
       {loading && !error && (
-        <div className="absolute inset-0 flex items-center justify-center bg-midnight-blue rounded-xl">
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-midnight-blue rounded-xl">
           <Spinner />
         </div>
       )}
@@ -76,9 +76,9 @@ export function PresentVideo({ src, friendName, naturalAspect = false, objectPos
           loop
           playsInline
           preload="auto"
-          className="w-full h-full object-cover rounded-xl"
-          style={{ objectPosition }}
-          onLoadedData={() => setLoading(false)}
+          className="w-full h-full object-cover rounded-xl transition-opacity duration-300"
+          style={{ objectPosition, opacity: loading ? 0 : 1 }}
+          onCanPlay={() => setLoading(false)}
           onError={() => { setError(true); setLoading(false) }}
           onPlay={() => tweenMusicVolume(0)}
           onPause={() => tweenMusicVolume(0.22)}
@@ -121,7 +121,7 @@ export function PastVideo({ src, index, activeIndex, onPlay }: { src: string; in
       aria-label={`Past memory ${index + 1}`}
     >
       {loading && !error && (
-        <div className="absolute inset-0 flex items-center justify-center bg-midnight-blue">
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-midnight-blue">
           <Spinner />
         </div>
       )}
@@ -138,8 +138,9 @@ export function PastVideo({ src, index, activeIndex, onPlay }: { src: string; in
             muted
             playsInline
             loop
-            className="w-full h-full object-cover"
-            onLoadedData={() => setLoading(false)}
+            className="w-full h-full object-cover transition-opacity duration-300"
+          style={{ opacity: loading ? 0 : 1 }}
+            onCanPlay={() => setLoading(false)}
             onError={() => { setError(true); setLoading(false) }}
           />
           {!isActive && (

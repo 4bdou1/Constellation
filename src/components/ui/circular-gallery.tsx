@@ -6,6 +6,22 @@ export interface GalleryItem {
   photo: string;
   color: string;
   id: string;
+  video?: string;
+}
+
+function PreloadLink({ src }: { src: string }) {
+  useEffect(() => {
+    if (!src) return;
+    const existing = document.querySelector(`link[href="${src}"]`);
+    if (!existing) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'video';
+      link.href = src;
+      document.head.appendChild(link);
+    }
+  }, [src]);
+  return null;
 }
 
 interface CircularGalleryProps extends HTMLAttributes<HTMLDivElement> {
@@ -86,6 +102,7 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
                 const relativeAngle = (itemAngle + totalRotation + 360) % 360;
                 const normalizedAngle = relativeAngle > 180 ? 360 - relativeAngle : relativeAngle;
                 const opacity = Math.max(0.25, 1 - (normalizedAngle / 180) * 0.85);
+                const isCentered = normalizedAngle < 35 && !isScrolling;
 
                 return (
                   <button
@@ -127,6 +144,7 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
                         </p>
                       </div>
                     </div>
+                    {isCentered && item.video && <PreloadLink src={item.video} />}
                   </button>
                 );
               })}

@@ -9,6 +9,21 @@ import { ParticleTextEffect } from '@/components/ui/particle-text-effect'
 import { friends } from '../data/friends'
 import { Check } from 'lucide-react'
 
+function PreloadVideo({ src }: { src: string }) {
+  useEffect(() => {
+    if (!src) return;
+    const existing = document.querySelector(`link[href="${src}"]`);
+    if (!existing) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'video';
+      link.href = src;
+      document.head.appendChild(link);
+    }
+  }, [src]);
+  return null;
+}
+
 function tweenVol(target: number, ms = 800) {
   const H = (window as any).Howler
   if (!H) return
@@ -54,7 +69,7 @@ function StrVideoSection() {
         src="/STR.mp4"
         loop
         playsInline
-        preload="metadata"
+        preload="auto"
         onPlay={onPlay}
         onPause={onPause}
         onEnded={onPause}
@@ -342,7 +357,7 @@ export default function Landing({ countdownDone = false }: { countdownDone?: boo
 
         {isMobile ? (
           <CircularGallery
-            items={friends.map(f => ({ id: f.id, name: f.name, quote: f.quote, photo: f.photo, color: f.color }))}
+            items={friends.map(f => ({ id: f.id, name: f.name, quote: f.quote, photo: f.photo, color: f.color, video: f.videos.present }))}
             onItemClick={(id) => navigateToFriend(id)}
           />
         ) : (
@@ -400,6 +415,7 @@ export default function Landing({ countdownDone = false }: { countdownDone?: boo
                         {friend.quote}
                       </p>
                     </div>
+                    {isActive && <PreloadVideo src={friend.videos.present} />}
                   </div>
                 );
               })
