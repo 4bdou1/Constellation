@@ -18,7 +18,6 @@ function playTrack(index: number) {
 
   const sound = new Howl({
     src: [TRACKS[index]],
-    html5: true,
     volume: VOLUME,
     onend: () => {
       trackIndex = (index + 1) % TRACKS.length
