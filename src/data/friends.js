@@ -5,7 +5,7 @@ export const friends = [
     color: '#ffd89b',
     photo: '/Olofu_p.jpg',
     position: { x: 0, y: -185 },
-    quote: "That brother who won't stop picking at you — and somehow you love him for it.",
+    quote: "That brother who won't stop picking at you — \"Patience\"",
     videos: {
       present: '/Olofu.mp4',
       past: [
