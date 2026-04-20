@@ -227,22 +227,39 @@ function FlipCard({ onContinue }: { onContinue: () => void }) {
   )
 }
 
-function MobileGrid({ onSelect }: { onSelect: (id: string) => void }) {
+function MobileCarousel({ onSelect }: { onSelect: (id: string) => void }) {
   return (
-    <div className="grid grid-cols-2 gap-3 px-4 pt-8 pb-4">
+    <div
+      style={{
+        overflowX: 'scroll',
+        overflowY: 'hidden',
+        display: 'flex',
+        gap: '16px',
+        padding: '32px 24px',
+        scrollSnapType: 'x mandatory',
+        WebkitOverflowScrolling: 'touch',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
+      }}
+    >
       {friends.map((friend, i) => (
         <motion.button
           key={friend.id}
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: i * 0.06 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: i * 0.05 }}
           onClick={() => onSelect(friend.id)}
-          className="relative rounded-2xl overflow-hidden text-left"
           style={{
-            height: '200px',
-            border: `1px solid ${friend.color}44`,
-            boxShadow: `0 0 20px ${friend.color}11`,
+            flex: '0 0 68vw',
+            maxWidth: '260px',
+            height: '380px',
+            scrollSnapAlign: 'center',
+            position: 'relative',
+            borderRadius: '20px',
+            overflow: 'hidden',
+            border: `1px solid ${friend.color}55`,
+            boxShadow: `0 0 30px ${friend.color}18`,
+            textAlign: 'left',
           }}
         >
           {friend.photo && (
@@ -250,17 +267,15 @@ function MobileGrid({ onSelect }: { onSelect: (id: string) => void }) {
               src={friend.photo}
               alt=""
               aria-hidden="true"
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ opacity: 0.5 }}
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.55 }}
             />
           )}
-          <div
-            className="absolute inset-0"
-            style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.15) 100%)' }}
-          />
-          <div className="absolute bottom-0 left-0 right-0 p-3 z-10">
-            <p className="font-serif text-xl font-medium" style={{ color: friend.color }}>{friend.name}</p>
-            <p className="font-sans text-[10px] leading-relaxed mt-1 line-clamp-2" style={{ color: '#fff8e799' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.88) 45%, rgba(0,0,0,0.1) 100%)' }} />
+          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '20px' }}>
+            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '26px', fontWeight: 500, color: friend.color, marginBottom: '6px' }}>
+              {friend.name}
+            </p>
+            <p style={{ fontFamily: 'sans-serif', fontSize: '12px', lineHeight: 1.6, color: '#fff8e7aa', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
               {friend.quote}
             </p>
           </div>
@@ -361,7 +376,7 @@ export default function Landing() {
         </div>
 
         {isMobile ? (
-          <MobileGrid onSelect={(id) => navigate(`/friend/${id}`)} />
+          <MobileCarousel onSelect={(id: string) => navigate(`/friend/${id}`)} />
         ) : (
           <RadialScrollGallery
             baseRadius={460}
