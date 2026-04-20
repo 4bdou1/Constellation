@@ -227,10 +227,61 @@ function FlipCard({ onContinue }: { onContinue: () => void }) {
   )
 }
 
+function MobileGrid({ onSelect }: { onSelect: (id: string) => void }) {
+  return (
+    <div className="grid grid-cols-2 gap-3 px-4 pt-8 pb-4">
+      {friends.map((friend, i) => (
+        <motion.button
+          key={friend.id}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: i * 0.06 }}
+          onClick={() => onSelect(friend.id)}
+          className="relative rounded-2xl overflow-hidden text-left"
+          style={{
+            height: '200px',
+            border: `1px solid ${friend.color}44`,
+            boxShadow: `0 0 20px ${friend.color}11`,
+          }}
+        >
+          {friend.photo && (
+            <img
+              src={friend.photo}
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ opacity: 0.5 }}
+            />
+          )}
+          <div
+            className="absolute inset-0"
+            style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.15) 100%)' }}
+          />
+          <div className="absolute bottom-0 left-0 right-0 p-3 z-10">
+            <p className="font-serif text-xl font-medium" style={{ color: friend.color }}>{friend.name}</p>
+            <p className="font-sans text-[10px] leading-relaxed mt-1 line-clamp-2" style={{ color: '#fff8e799' }}>
+              {friend.quote}
+            </p>
+          </div>
+        </motion.button>
+      ))}
+    </div>
+  )
+}
+
 export default function Landing() {
   const navigate = useNavigate()
   const galleryRef = useRef<HTMLDivElement>(null)
   const particleRef = useRef<HTMLDivElement>(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   const scrollToGallery = () => {
     galleryRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -288,9 +339,9 @@ export default function Landing() {
 
       {/* Gallery Section */}
       <div ref={galleryRef} className="relative z-10 py-12 sm:py-32">
-        {/* Header for Gallery */}
+        {/* Header */}
         <div className="text-center mb-0 px-4">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -298,85 +349,80 @@ export default function Landing() {
           >
             The Hearts
           </motion.h2>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 0.6 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             className="font-sans text-[#fff8e7] max-w-lg mx-auto italic text-lg"
           >
-            Scroll further to travel through our constellation of souls.
+            {isMobile ? 'Tap a card to discover each soul.' : 'Scroll further to travel through our constellation of souls.'}
           </motion.p>
         </div>
 
-        <RadialScrollGallery
-          baseRadius={460}
-          mobileRadius={240}
-          scrollDuration={2500}
-          visiblePercentage={45}
-          onItemSelect={(index) => navigate(`/friend/${friends[index].id}`)}
-        >
-          {(hoveredIndex) =>
-            friends.map((friend, index) => {
-              const isActive = hoveredIndex === index;
-              return (
-                <div
-                  key={index}
-                  className={`
-                    w-[180px] h-[260px] sm:w-[240px] sm:h-[320px]
-                    rounded-2xl border p-8 flex flex-col justify-between items-start
-                    transition-all duration-500 shadow-xl overflow-hidden relative
-                    ${isActive
-                      ? 'border-[#ffd89b] text-[#ffd89b] scale-100 shadow-[0_0_40px_rgba(255,216,155,0.2)]'
-                      : 'border-white/10 text-[#fff8e7]/30 scale-90 opacity-40'
-                    }
-                  `}
-                >
-                  {/* Background photo or fallback */}
-                  {friend.photo ? (
-                    <img
-                      src={friend.photo}
-                      alt=""
-                      aria-hidden="true"
-                      className="absolute inset-0 w-full h-full object-cover"
-                      style={{ opacity: isActive ? 0.45 : 0.2 }}
-                    />
-                  ) : (
+        {isMobile ? (
+          <MobileGrid onSelect={(id) => navigate(`/friend/${id}`)} />
+        ) : (
+          <RadialScrollGallery
+            baseRadius={460}
+            mobileRadius={240}
+            scrollDuration={2500}
+            visiblePercentage={45}
+            onItemSelect={(index) => navigate(`/friend/${friends[index].id}`)}
+          >
+            {(hoveredIndex) =>
+              friends.map((friend, index) => {
+                const isActive = hoveredIndex === index;
+                return (
+                  <div
+                    key={index}
+                    className={`
+                      w-[180px] h-[260px] sm:w-[240px] sm:h-[320px]
+                      rounded-2xl border p-8 flex flex-col justify-between items-start
+                      transition-all duration-500 shadow-xl overflow-hidden relative
+                      ${isActive
+                        ? 'border-[#ffd89b] text-[#ffd89b] scale-100 shadow-[0_0_40px_rgba(255,216,155,0.2)]'
+                        : 'border-white/10 text-[#fff8e7]/30 scale-90 opacity-40'
+                      }
+                    `}
+                  >
+                    {friend.photo ? (
+                      <img
+                        src={friend.photo}
+                        alt=""
+                        aria-hidden="true"
+                        className="absolute inset-0 w-full h-full object-cover"
+                        style={{ opacity: isActive ? 0.45 : 0.2 }}
+                      />
+                    ) : (
+                      <div
+                        className="absolute inset-0"
+                        style={{ background: isActive ? 'rgba(26,31,58,0.85)' : 'rgba(10,14,39,0.7)' }}
+                      />
+                    )}
                     <div
                       className="absolute inset-0"
-                      style={{ background: isActive ? 'rgba(26,31,58,0.85)' : 'rgba(10,14,39,0.7)' }}
+                      style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.75) 50%, rgba(0,0,0,0.2) 100%)' }}
                     />
-                  )}
-                  {/* Dark gradient overlay for text legibility */}
-                  <div
-                    className="absolute inset-0"
-                    style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.75) 50%, rgba(0,0,0,0.2) 100%)' }}
-                  />
-
-                  {/* Content */}
-                  <div className="relative w-full flex justify-end items-start z-10">
-                    {isActive && (
-                      <motion.div
-                        layoutId="active-check"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                      >
-                        <Check className="w-6 h-6 text-[#ffd89b]" />
-                      </motion.div>
-                    )}
+                    <div className="relative w-full flex justify-end items-start z-10">
+                      {isActive && (
+                        <motion.div layoutId="active-check" initial={{ scale: 0 }} animate={{ scale: 1 }}>
+                          <Check className="w-6 h-6 text-[#ffd89b]" />
+                        </motion.div>
+                      )}
+                    </div>
+                    <div className="relative z-10">
+                      <h3 className="text-3xl font-serif font-medium mb-3 tracking-tight">{friend.name}</h3>
+                      <p className={`text-xs leading-relaxed line-clamp-4 font-sans ${isActive ? 'text-[#fff8e7]/80' : 'text-[#fff8e7]/30'}`}>
+                        {friend.quote}
+                      </p>
+                    </div>
                   </div>
-
-                  <div className="relative z-10">
-                    <h3 className="text-3xl font-serif font-medium mb-3 tracking-tight">{friend.name}</h3>
-                    <p className={`text-xs leading-relaxed line-clamp-4 font-sans ${isActive ? 'text-[#fff8e7]/80' : 'text-[#fff8e7]/30'}`}>
-                      {friend.quote}
-                    </p>
-                  </div>
-                </div>
-              );
-            })
-          }
-        </RadialScrollGallery>
+                );
+              })
+            }
+          </RadialScrollGallery>
+        )}
       </div>
 
       {/* STR video section */}
