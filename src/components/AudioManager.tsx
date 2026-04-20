@@ -33,23 +33,49 @@ function playTrack(index: number) {
   playing = true
 }
 
+function playTrackFadeIn(index: number) {
+  howl?.unload()
+
+  const sound = new Howl({
+    src: [TRACKS[index]],
+    volume: 0,
+    onend: () => {
+      trackIndex = (index + 1) % TRACKS.length
+      playTrack(trackIndex)
+    },
+    onplayerror: () => {
+      sound.once('unlock', () => sound.play())
+    },
+  })
+
+  howl = sound
+  sound.play()
+  sound.fade(0, VOLUME, 11000)
+  playing = true
+}
+
+// Called by CountdownScreen when the countdown reaches 9
+export function startMusic() {
+  if (playing) return
+  const H = Howler as any
+  if (H?.ctx?.state === 'suspended') {
+    H.ctx.resume().then(() => playTrackFadeIn(0))
+  } else {
+    playTrackFadeIn(0)
+  }
+}
+
 export default function AudioManager() {
   useEffect(() => {
-    if (playing) return
-
-    playTrack(0)
-
+    // Unlock AudioContext on any interaction (needed for iOS/Safari)
     const onInteract = () => {
-      if (!playing) playTrack(trackIndex)
-      if ((Howler as any).ctx?.state === 'suspended') {
-        ;(Howler as any).ctx.resume()
-      }
+      const H = Howler as any
+      if (H?.ctx?.state === 'suspended') H.ctx.resume()
     }
-    const events: (keyof WindowEventMap)[] = ['pointerdown', 'keydown', 'touchstart', 'scroll']
-    events.forEach(e => window.addEventListener(e, onInteract, { once: true, passive: true }))
-
+    const events: (keyof WindowEventMap)[] = ['pointerdown', 'keydown', 'touchstart']
+    events.forEach((e) => window.addEventListener(e, onInteract, { once: true, passive: true }))
     return () => {
-      events.forEach(e => window.removeEventListener(e, onInteract))
+      events.forEach((e) => window.removeEventListener(e, onInteract))
     }
   }, [])
 

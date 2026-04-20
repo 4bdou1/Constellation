@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from 'react'
+import TypingEffect from '@/components/ui/typing-effect'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { RadialScrollGallery } from '@/components/ui/portfolio-and-image-gallery'
@@ -63,7 +64,7 @@ function StrVideoSection() {
   )
 }
 
-const MESSAGE = `You took care of me yesterday when you needed care yourself. That's love, isn't it? So tonight, let me take care of your heart. I brought together the voices that know you, the faces that miss you, the memories that won't fade. Je t'aime. Welcome to what I call the constellation.`
+const MESSAGE = `You carry so much, even when no one sees it. So let me carry something for you tonight - these voices, these faces, these moments that refuse to fade.  I brought it all back for you, sweetheart. Not to stay in the past, but to remind you what's still waiting in the future.  Welcome to what I call the constellation.`
 
 function FlipCard({ onContinue }: { onContinue: () => void }) {
   const [flipped, setFlipped] = useState(false)
@@ -229,7 +230,7 @@ function FlipCard({ onContinue }: { onContinue: () => void }) {
 }
 
 
-export default function Landing() {
+export default function Landing({ countdownDone = false }: { countdownDone?: boolean }) {
   const navigate = useNavigate()
   const galleryRef = useRef<HTMLDivElement>(null)
   const particleRef = useRef<HTMLDivElement>(null)
@@ -244,6 +245,20 @@ export default function Landing() {
 
   const scrollToGallery = () => {
     galleryRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  // Restore scroll position when returning from a friend page
+  useEffect(() => {
+    const saved = sessionStorage.getItem('landingScrollY')
+    if (saved) {
+      window.scrollTo({ top: parseInt(saved, 10), behavior: 'instant' })
+      sessionStorage.removeItem('landingScrollY')
+    }
+  }, [])
+
+  const navigateToFriend = (id: string) => {
+    sessionStorage.setItem('landingScrollY', String(window.scrollY))
+    navigate(`/friend/${id}`)
   }
 
   // Fade music out completely when the particle quote section is reached
@@ -279,13 +294,19 @@ export default function Landing() {
           }}
         >
           {/* Heading */}
-          <motion.h1
+          <motion.div
             variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.9 } } }}
-            className="font-serif text-5xl sm:text-6xl md:text-7xl font-medium mb-4 leading-tight"
-            style={{ color: '#ffd89b', textShadow: '0 0 40px rgba(255,216,155,0.3)' }}
+            className="mb-4"
           >
-            Welcome sweetheart
-          </motion.h1>
+            <TypingEffect
+              texts={['Welcome Monkey']}
+              typingSpeed={90}
+              rotationInterval={999999}
+              trigger={countdownDone}
+              className="font-serif text-5xl sm:text-6xl md:text-7xl font-medium leading-tight"
+              style={{ color: '#ffd89b', textShadow: '0 0 40px rgba(255,216,155,0.3)' }}
+            />
+          </motion.div>
 
           {/* Flip card */}
           <motion.div
@@ -322,7 +343,7 @@ export default function Landing() {
         {isMobile ? (
           <CircularGallery
             items={friends.map(f => ({ id: f.id, name: f.name, quote: f.quote, photo: f.photo, color: f.color }))}
-            onItemClick={(id) => navigate(`/friend/${id}`)}
+            onItemClick={(id) => navigateToFriend(id)}
           />
         ) : (
           <RadialScrollGallery
@@ -330,7 +351,7 @@ export default function Landing() {
             mobileRadius={240}
             scrollDuration={2500}
             visiblePercentage={45}
-            onItemSelect={(index) => navigate(`/friend/${friends[index].id}`)}
+            onItemSelect={(index) => navigateToFriend(friends[index].id)}
           >
             {(hoveredIndex) =>
               friends.map((friend, index) => {
