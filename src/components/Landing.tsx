@@ -371,7 +371,7 @@ export default function Landing() {
             transition={{ delay: 0.2 }}
             className="font-sans text-[#fff8e7] max-w-lg mx-auto italic text-lg"
           >
-            {isMobile ? 'Tap a card to discover each soul.' : 'Scroll further to travel through our constellation of souls.'}
+            {isMobile ? 'Tap a card to discover each soul.' : 'Scroll further to find the voices that still echo in your heart'}
           </motion.p>
         </div>
 
