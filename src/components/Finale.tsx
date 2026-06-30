@@ -83,7 +83,7 @@ export default function Finale() {
           className="mt-8 font-serif italic text-sm"
           style={{ color: '#ffd89b' }}
         >
-          Made with love by your husband ♥
+          Made with love by your lover ♥
         </motion.p>
 
         {/* Back link */}

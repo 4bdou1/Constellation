@@ -475,7 +475,7 @@ export default function Landing({ countdownDone = false }: { countdownDone?: boo
           className="mt-14 font-serif italic text-base"
           style={{ color: '#ffd89b99' }}
         >
-          Made with love by your husband ♥
+          Made with love by your lover ♥
         </motion.p>
       </motion.div>
 
